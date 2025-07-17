@@ -2,7 +2,7 @@
 
 A comprehensive RESTful service for Identity and Access Management (IAM) built with NestJS, TypeScript, and PostgreSQL.
 
-## 🚀 Features
+## Features
 
 - **User Management**: Full CRUD operations for users with IAM fields
 - **Authentication**: JWT-based authentication with login and profile endpoints
@@ -13,7 +13,7 @@ A comprehensive RESTful service for Identity and Access Management (IAM) built w
 - **Logging**: Request and error logging
 - **Database**: PostgreSQL with TypeORM migrations
 
-## 📋 Tech Stack
+## Tech Stack
 
 - **Framework**: NestJS with TypeScript
 - **Database**: PostgreSQL with TypeORM
@@ -23,98 +23,20 @@ A comprehensive RESTful service for Identity and Access Management (IAM) built w
 - **Testing**: Jest
 - **Security**: bcrypt for password hashing
 
-## 📁 Project Structure
 
-```
-src/
-├── modules/
-│   ├── auth/
-│   │   ├── auth.controller.ts
-│   │   ├── auth.service.ts
-│   │   ├── auth.module.ts
-│   │   ├── dto/
-│   │   │   ├── login.dto.ts
-│   │   │   └── auth-response.dto.ts
-│   │   └── strategies/
-│   │       └── jwt.strategy.ts
-│   ├── users/
-│   │   ├── users.controller.ts
-│   │   ├── users.service.ts
-│   │   ├── users.module.ts
-│   │   ├── dto/
-│   │   │   ├── create-user.dto.ts
-│   │   │   └── update-user.dto.ts
-│   │   └── entities/
-│   │       └── user.entity.ts
-│   └── appointments/ (bonus)
-│       ├── appointments.controller.ts
-│       ├── appointments.service.ts
-│       ├── appointments.module.ts
-│       ├── dto/
-│       │   └── create-appointment.dto.ts
-│       └── entities/
-│           └── appointment.entity.ts
-├── common/
-│   ├── decorators/
-│   │   └── roles.decorator.ts
-│   ├── guards/
-│   │   ├── jwt-auth.guard.ts
-│   │   └── roles.guard.ts
-│   ├── interceptors/
-│   │   └── logging.interceptor.ts
-│   └── enums/
-│       └── roles.enum.ts
-├── config/
-│   └── database.config.ts
-├── migrations/
-│   └── [timestamp]-create-users.ts
-├── app.module.ts
-└── main.ts
-```
-
-## 🗄️ Database Schema
-
-### Users Table
-```sql
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(255) UNIQUE NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password_hash VARCHAR(255) NOT NULL,
-  roles TEXT[] DEFAULT ARRAY['user'],
-  status VARCHAR(50) DEFAULT 'active',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-### Appointments Table (Bonus)
-```sql
-CREATE TABLE appointments (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
-  title VARCHAR(255) NOT NULL,
-  description TEXT,
-  date_time TIMESTAMP NOT NULL,
-  status VARCHAR(50) DEFAULT 'scheduled',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-## 🔧 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 - Node.js (v16 or higher)
 - PostgreSQL (v12 or higher)
-- npm or yarn
+- npm
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd iam-dashboard-backend
+   cd iam-dashboard-service
    ```
 
 2. **Install dependencies**
@@ -163,7 +85,7 @@ CREATE TABLE appointments (
    npm run start:prod
    ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Unit tests
@@ -176,13 +98,13 @@ npm run test:e2e
 npm run test:cov
 ```
 
-## 📖 API Documentation
+## API Documentation
 
 Once the application is running, access Swagger documentation at:
-- **Local**: http://localhost:3000/api
+- **Local**: http://localhost:3000/docs
 - **Interactive docs**: Swagger UI with all endpoints and schemas
 
-## 🔐 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `POST /auth/login` - User login (returns JWT)
@@ -199,7 +121,7 @@ Once the application is running, access Swagger documentation at:
 - `GET /appointments` - Get appointments with optional userId filter
 - `POST /appointments` - Create new appointment (protected)
 
-## 🔒 Security Features
+## Security Features
 
 1. **Password Hashing**: bcrypt with salt rounds
 2. **JWT Authentication**: Secure token-based auth
@@ -207,36 +129,6 @@ Once the application is running, access Swagger documentation at:
 4. **RBAC**: Role-based access control
 5. **Request Logging**: Comprehensive logging system
 6. **CORS**: Cross-origin resource sharing configured
-
-## 🔍 Example Usage
-
-### Login
-```bash
-curl -X POST http://localhost:3000/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"username": "admin", "password": "password"}'
-```
-
-### Create User
-```bash
-curl -X POST http://localhost:3000/users \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  -d '{
-    "username": "johndoe",
-    "email": "john@example.com",
-    "password": "securepassword",
-    "roles": ["user"]
-  }'
-```
-
-### Get Users
-```bash
-curl -X GET http://localhost:3000/users \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN"
-```
-
-## 📊 Production Considerations
 
 ### Monitoring
 - **Health Checks**: `/health` endpoint
@@ -262,7 +154,7 @@ curl -X GET http://localhost:3000/users \
 - **Backups**: Automated backup strategy
 - **Migrations**: Zero-downtime migrations
 
-## 🧪 Testing Strategy
+## Testing Strategy
 
 ### Unit Tests (5+ tests)
 - User service methods
@@ -277,65 +169,13 @@ curl -X GET http://localhost:3000/users \
 - RBAC enforcement
 - API endpoint testing
 
-## 📝 Package.json Dependencies
+1. **Access Swagger**: http://localhost:3000/docs
 
-```json
-{
-  "dependencies": {
-    "@nestjs/common": "^10.0.0",
-    "@nestjs/core": "^10.0.0",
-    "@nestjs/platform-express": "^10.0.0",
-    "@nestjs/jwt": "^10.0.0",
-    "@nestjs/passport": "^10.0.0",
-    "@nestjs/swagger": "^7.0.0",
-    "@nestjs/typeorm": "^10.0.0",
-    "bcrypt": "^5.1.0",
-    "class-validator": "^0.14.0",
-    "class-transformer": "^0.5.1",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1",
-    "pg": "^8.11.0",
-    "typeorm": "^0.3.17",
-    "winston": "^3.10.0"
-  },
-  "devDependencies": {
-    "@nestjs/testing": "^10.0.0",
-    "@types/bcrypt": "^5.0.0",
-    "@types/jest": "^29.0.0",
-    "@types/node": "^20.0.0",
-    "@types/passport-jwt": "^3.0.9",
-    "jest": "^29.0.0",
-    "sqlite3": "^5.1.6",
-    "supertest": "^6.3.0",
-    "ts-jest": "^29.0.0",
-    "typescript": "^5.0.0"
-  }
-}
-```
-
-## 🚀 Getting Started Quickly
-
-1. **Quick Setup**:
-   ```bash
-   npm install
-   cp .env.example .env
-   npm run migration:run
-   npm run start:dev
-   ```
-
-2. **Access Swagger**: http://localhost:3000/api
-
-3. **Default Admin User**:
+2. **Default Admin User**:
     - Username: `admin`
     - Password: `admin123`
 
-## 📋 Postman Collection
-
-Import the provided Postman collection for testing:
-- File: `iam-dashboard.postman_collection.json`
-- Environment: `iam-dashboard.postman_environment.json`
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -343,6 +183,6 @@ Import the provided Postman collection for testing:
 4. Push to the branch
 5. Create a Pull Request
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.# IAM-Dashboard-Service
