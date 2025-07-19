@@ -278,4 +278,4 @@ Import the provided Postman collection for testing:
 
 ## License
 
-This project is licensed under the MIT License.# IAM-Dashboard-Service
+This project is licensed under the [MIT License](LICENSE).
