@@ -23,7 +23,7 @@ A comprehensive RESTful service for Identity and Access Management (IAM) built w
 - **Testing**: Jest
 - **Security**: bcrypt for password hashing
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -262,7 +262,7 @@ curl -X GET http://localhost:3000/users \
    - Username: `admin`
    - Password: `admin123`
 
-## 📋 Postman Collection
+## Postman Collection
 
 Import the provided Postman collection for testing:
 - File: `iam-dashboard.postman_collection.json`
