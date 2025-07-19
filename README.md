@@ -23,6 +23,55 @@ A comprehensive RESTful service for Identity and Access Management (IAM) built w
 - **Testing**: Jest
 - **Security**: bcrypt for password hashing
 
+## 📁 Project Structure
+
+```
+src/
+├── modules/
+│   ├── auth/
+│   │   ├── auth.controller.ts
+│   │   ├── auth.service.ts
+│   │   ├── auth.module.ts
+│   │   ├── dto/
+│   │   │   ├── login.dto.ts
+│   │   │   └── auth-response.dto.ts
+│   │   └── strategies/
+│   │       └── jwt.strategy.ts
+│   ├── users/
+│   │   ├── users.controller.ts
+│   │   ├── users.service.ts
+│   │   ├── users.module.ts
+│   │   ├── dto/
+│   │   │   ├── create-user.dto.ts
+│   │   │   └── update-user.dto.ts
+│   │   └── entities/
+│   │       └── user.entity.ts
+│   └── appointments/ (bonus)
+│       ├── appointments.controller.ts
+│       ├── appointments.service.ts
+│       ├── appointments.module.ts
+│       ├── dto/
+│       │   └── create-appointment.dto.ts
+│       └── entities/
+│           └── appointment.entity.ts
+├── common/
+│   ├── decorators/
+│   │   └── roles.decorator.ts
+│   ├── guards/
+│   │   ├── jwt-auth.guard.ts
+│   │   └── roles.guard.ts
+│   ├── interceptors/
+│   │   └── logging.interceptor.ts
+│   └── enums/
+│       └── roles.enum.ts
+├── config/
+│   └── database.config.ts
+├── migrations/
+│   └── [timestamp]-create-users.ts
+├── app.module.ts
+└── main.ts
+```
+
 
 ## Setup Instructions
 
@@ -117,9 +166,37 @@ Once the application is running, access Swagger documentation at:
 - `PUT /users/:id` - Update user (protected)
 - `DELETE /users/:id` - Delete user (admin only)
 
-### Appointments (Bonus)
+### Appointments
 - `GET /appointments` - Get appointments with optional userId filter
 - `POST /appointments` - Create new appointment (protected)
+
+## Example Usage
+
+### Login
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "admin", "password": "password"}'
+```
+
+### Create User
+```bash
+curl -X POST http://localhost:3000/users \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -d '{
+    "username": "johndoe",
+    "email": "john@example.com",
+    "password": "securepassword",
+    "roles": ["user"]
+  }'
+```
+
+### Get Users
+```bash
+curl -X GET http://localhost:3000/users \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
+```
 
 ## Security Features
 
@@ -169,11 +246,27 @@ Once the application is running, access Swagger documentation at:
 - RBAC enforcement
 - API endpoint testing
 
-1. **Access Swagger**: http://localhost:3000/docs
+## 🚀 Getting Started Quickly
 
-2. **Default Admin User**:
-    - Username: `admin`
-    - Password: `admin123`
+1. **Quick Setup**:
+   ```bash
+   npm install
+   cp .env.example .env
+   npm run migration:run
+   npm run start:dev
+   ```
+
+2. **Access Swagger**: http://localhost:3000/docs
+
+3. **Default Admin User**:
+   - Username: `admin`
+   - Password: `admin123`
+
+## 📋 Postman Collection
+
+Import the provided Postman collection for testing:
+- File: `iam-dashboard.postman_collection.json`
+- Environment: `iam-dashboard.postman_environment.json`
 
 ## Contributing
 

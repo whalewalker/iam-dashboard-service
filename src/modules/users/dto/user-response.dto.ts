@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Exclude, Expose } from 'class-transformer';
+import { Expose } from 'class-transformer';
 import { Role } from '../../../common/enums/roles.enum';
 import { UserStatus } from '../../../common/enums/status.enum';
 
@@ -31,7 +31,4 @@ export class UserResponseDto {
   @ApiProperty({ description: 'Last update date' })
   @Expose()
   updatedAt: Date;
-
-  @Exclude()
-  passwordHash: string;
 }
