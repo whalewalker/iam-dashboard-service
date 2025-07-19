@@ -247,7 +247,7 @@ curl -X GET http://localhost:3000/users \
 - RBAC enforcement
 - API endpoint testing
 
-## 🚀 Getting Started Quickly
+## Getting Started Quickly
 
 1. **Quick Setup**:
    ```bash
