@@ -266,7 +266,6 @@ curl -X GET http://localhost:3000/users \
 
 Import the provided Postman collection for testing:
 - File: `iam-dashboard.postman_collection.json`
-- Environment: `iam-dashboard.postman_environment.json`
 
 ## Contributing
 
