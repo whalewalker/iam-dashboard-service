@@ -119,9 +119,6 @@ src/
    
    # Run migrations
    npm run migration:run
-   
-   # (Optional) Seed data
-   npm run seed
    ```
 
 5. **Start the application**
@@ -209,6 +206,10 @@ curl -X GET http://localhost:3000/users \
 
 ### Monitoring
 - **Health Checks**: `/health` endpoint
+
+## Advanced Features
+
+### Monitoring
 - **Metrics**: Prometheus integration
 - **Logging**: Structured logging with Winston
 - **APM**: Application Performance Monitoring
@@ -223,7 +224,7 @@ curl -X GET http://localhost:3000/users \
 - **Rate Limiting**: API rate limiting
 - **SAST**: Static Application Security Testing
 - **Dependency Scanning**: Automated vulnerability scanning
-- **Secrets Management**: AWS Secrets Manager/HashiCorp Vault
+- **Secrets Management**: AWS Secrets Manager / HashiCorp Vault
 
 ### Database
 - **Connection Pooling**: PostgreSQL connection pooling
